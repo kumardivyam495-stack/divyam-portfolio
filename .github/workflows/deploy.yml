@@ -1,17 +1,25 @@
-# Workflow to build and deploy Next.js site to GitHub Pages
-name: Deploy to GitHub Pages
+# Workflow to build and deploy Next.js site natively via GitHub Actions
+name: Deploy Next.js site to Pages
 
 on:
   push:
-    branches:
-      - main # Triggers when you push to main branch
+    branches: ["main"]
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
-    concurrency: ci-${{ github.ref }}
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -29,8 +37,11 @@ jobs:
       - name: Build Next.js Site 🏗️
         run: npm run build
 
-      - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload Artifact 📤
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: out # Next.js static export folder name
-          branch: gh-pages # Target branch for GitHub Pages
+          path: ./out
+
+      - name: Deploy to GitHub Pages 🚀
+        id: deployment
+        uses: actions/deploy-pages@v4

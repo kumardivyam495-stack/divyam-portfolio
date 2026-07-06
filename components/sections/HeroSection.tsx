@@ -13,6 +13,7 @@ const floatingStats = [
 const platforms = ["Instagram", "YouTube", "LinkedIn"];
 
 export default function HeroSection() {
+  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -198,7 +199,7 @@ export default function HeroSection() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/hero-section.jpeg"
+                  src={`${prefix}/hero-section.jpeg`}
                   alt="Divyam Kumar"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-102"
                 />

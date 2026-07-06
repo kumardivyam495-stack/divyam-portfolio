@@ -35,6 +35,7 @@ const floatingCards = [
 ];
 
 export default function AboutSection() {
+  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
   return (
     <section id="about" className="relative py-32">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24"
@@ -154,7 +155,7 @@ export default function AboutSection() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/about-section.jpeg"
+                src={`${prefix}/about-section.jpeg`}
                 alt="Divyam Kumar"
                 className="w-full h-full object-cover"
               />

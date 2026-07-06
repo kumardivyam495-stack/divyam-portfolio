@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
+const basePath = "/divyam-portfolio";
+
 const nextConfig: NextConfig = {
+  output: "export",
+  basePath: basePath,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   images: {
     unoptimized: true,
     remotePatterns: [

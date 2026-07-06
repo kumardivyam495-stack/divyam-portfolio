@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { portfolioItems, portfolioCategories } from "@/content/projects";
 
 export default function PortfolioSection() {
+  const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
   const [activeCategory, setActiveCategory] = useState("all");
 
   const filtered =
@@ -113,7 +114,7 @@ export default function PortfolioSection() {
                   {item.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={item.image}
+                      src={`${prefix}${item.image}`}
                       alt={item.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
